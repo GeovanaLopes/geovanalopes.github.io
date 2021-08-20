@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualização de Dados com o R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="     Geovana Lopes" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/pymjs/pym.v1.js"></script>
+    <script src="libs/widgetframe-binding/widgetframe.js"></script>
+    <link rel="stylesheet" href="css/kunoichi.css" type="text/css" />
+    <link rel="stylesheet" href="css/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="css/rladies-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualização de Dados com o R<br>
+## ggplot <br><br><br><br>
+### <br><br><br><br> Geovana Lopes
+### 20/08/2021
+
+---
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+
+
+&lt;/span&gt;&lt;/div&gt; 
+
+
+
+
+
+
+
+
+
+&lt;!-- R --&gt;
+---
+class: center
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/R_logo.svg.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="25%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+- O R é uma linguagem de programação, além de um ambiente de software gratuito. 
+
+--
+
+- oferece um vasto leque de funcionalidades acessíveis via instalação de bibliotecas.
+
+--
+
+- o R possui uma comunidade extremamente ativa, engajada desde o aprimoramento da ferramenta e desenvolvimento de novas bibliotecas, até o suporte aos usuários.
+
+--
+
+- Saiba mais em: [r-project.org](https://www.r-project.org/about.html) 
+
+
+
+&lt;!-- ciclo de ciência de dados sem R --&gt;
+---
+class: middle
+
+# O Ciclo da Ciência de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/data-analysis_withoutR.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; - (adaptado de Wickham &amp;amp; Grolemund, 2017&amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; - (adaptado de Wickham &amp; Grolemund, 2017&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- ciclo de ciência de dados com R --&gt;
+---
+class: middle
+
+# O Ciclo da Ciência de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/data-analysis_withR.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; - (adaptado de Wickham &amp;amp; Grolemund, 2017&amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; - (adaptado de Wickham &amp; Grolemund, 2017&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;!-- communication 1 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_1.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 2 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_2.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 3 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_3.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 4 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_4.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 5 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_5.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 6 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_6_oQueFalar.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;!-- comunicação 7 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_7.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Fonte: &amp;lt;a href='https://www.data-to-viz.com/'&amp;gt; Data to Viz&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Fonte: &lt;a href='https://www.data-to-viz.com/'&gt; Data to Viz&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 8 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_8_comoFalar.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 9 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_9_escalaVariavel.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="60%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 10 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_10_qualMensagem.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- comunicação 11 --&gt;
+---
+class: middle
+
+# Visualização de Dados
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_11_GrammarGraphics.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="80%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Gráficos além da comunicação dos resultados...
+
+
+&lt;!-- introdução ggplot --&gt;
+---
+class: middle
+&lt;img src="index_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- introdução ggplot --&gt;
+---
+
+&lt;!-- introdução ggplot --&gt;
+--- 
+
+&lt;img src="index_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: middle
+
+# Visualização de Dados + R = ggplot2
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/ggplot2_obra_prima_pt.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="50%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- package ggplot --&gt;
+---
+class: center
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/rlogos/hex-ggplot2.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt; &amp;lt;/center&amp;gt;&amp;lt;/b&amp;gt;" width="20%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt; &lt;/center&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+- Faz com o mapeamento modular dos dados, seguindo uma lógica de camadas, similarmente ao encadeamento do Pipe (`%&gt;%`) - porém utilizando o operador +
+
+--
+
+- Desenvolvida por [Hadley Wickham](http://hadley.nz/) durante a sua tese de doutorado, na Universidade de Iowa
+
+--
+
+- Inspirada no livro "The Grammar of Graphics" do Leland Wilkinson (1999) (daí o `gg` do `ggplot2`].
+
+--
+
+- Mantido pela [RStudio](https://rstudio.com/)
+
+
+
+&lt;!-- grammar of graphics + ggplot2 --&gt;
+
+---
+class: middle
+
+# Visualização de Dados 
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_11_GrammarGraphicsGgplot_0.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Fonte: &amp;lt;a href='http://sape.inf.usi.ch/quick-reference/ggplot2'&amp;gt; sape research group &amp;lt;/a&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Fonte: &lt;a href='http://sape.inf.usi.ch/quick-reference/ggplot2'&gt; sape research group &lt;/a&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- grammar of graphics + ggplot2 --&gt;
+
+---
+class: middle
+
+# Visualização de Dados + R = ggplot2 
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/communication/communication_11_GrammarGraphicsGgplot.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Fonte: &amp;lt;a href='http://sape.inf.usi.ch/quick-reference/ggplot2'&amp;gt; sape research group &amp;lt;/a&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Fonte: &lt;a href='http://sape.inf.usi.ch/quick-reference/ggplot2'&gt; sape research group &lt;/a&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;!-- sintaxe básica do ggplot --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+
+```r
+  ggplot(data, aesthetics) +
+    geometries()
+```
+
+&lt;img src="img/communication/communication_11_GrammarGraphicsGgplot_sintaxe.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+
+```r
+  ggplot(data, aesthetics) +
+    geometries(statistics) +
+    facets +
+    coordinates +
+    theme
+```
+
+&lt;img src="img/communication/communication_11_GrammarGraphicsGgplot_sintaxe-2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+
+&lt;!-- sintaxe básica do ggplot-1 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+```r
+#Conjunto de bibliotecas para ciência de dados 
+  install.packages("tidyverse")
+  library(tidyverse)
+```
+
+
+```r
+dados &lt;- tibble(var_x = 1:4, var_y = seq(2,8,2), var_grupo = c(rep("a", 3),"b")) 
+summary(dados)
+  #&gt;      var_x          var_y      var_grupo        
+  #&gt;  Min.   :1.00   Min.   :2.0   Length:4          
+  #&gt;  1st Qu.:1.75   1st Qu.:3.5   Class :character  
+  #&gt;  Median :2.50   Median :5.0   Mode  :character  
+  #&gt;  Mean   :2.50   Mean   :5.0                     
+  #&gt;  3rd Qu.:3.25   3rd Qu.:6.5                     
+  #&gt;  Max.   :4.00   Max.   :8.0
+```
+
+
+
+
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-0-1.png)
+]
+
+
+
+
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y)) 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-1-1.png)
+]
+
+
+
+
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y)) +
+  geom_point()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-2-1.png)
+]
+
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-4 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados) +
+  geom_point(aes(x = var_x, y = var_y))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-4-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot ggplot-1-5 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados) +
+  geom_point(aes(x = var_x, y = var_y, 
+                 color = var_grupo))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-5-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-6 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y)) +
+  geom_point(aes(color = var_grupo))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-6-1.png)
+]
+
+
+&lt;!-- sintaxe básica do ggplot-1-6-1 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo)) +
+  geom_point()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-6-1-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-7 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo)) +
+  geom_point() +
+  facet_grid(.~var_grupo)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-7-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-8 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo)) +
+  geom_label(aes(label=var_x)) +
+  facet_grid(.~var_grupo)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-8-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-9 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo,
+                   label = var_x)) +
+  geom_point() +
+  geom_label() +
+  facet_grid(.~var_grupo)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-9-1.png)
+]
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-10 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo,
+                   label = var_x)) +
+  geom_point() +
+  geom_label() +
+  facet_grid(.~var_grupo) +
+  theme_dark()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-10-1.png)
+]
+
+
+
+
+&lt;!-- sintaxe básica do ggplot-1-11 --&gt;
+---
+class: middle
+
+# Sintaxe Básica do ggplot2
+
+.left-code[
+
+
+```r
+#exemplo
+ p &lt;- ggplot(dados, aes(x = var_x, y = var_y, 
+                   color = var_grupo,
+                   label = var_x)) +
+  geom_point() +
+  geom_label() +
+  facet_grid(.~var_grupo) +
+  theme_dark()
+
+  p + facet_grid(var_grupo~.)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-ggplot-1-11-1.png)
+]
+
+
+
+
+&lt;!-- aplicações --&gt;
+---
+class: middle
+
+# Aplicações
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/ggplot2_visual.jpg" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="45%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;!-- Base de Dados Cars93 --&gt;
+---
+class: middle
+
+# Base de Dados Cars93
+
+```r
+#Conjunto de bibliotecas para ciência de dados 
+  install.packages("tidyverse")
+  library(tidyverse)
+
+#Pacote que contém base de dados Cars93
+  install.packages("MASS")
+  library(MASS)
+```
+
+
+
+```r
+df &lt;- Cars93 %&gt;% 
+  select(Horsepower, Type, AirBags)
+
+glimpse(df)
+  #&gt; Rows: 93
+  #&gt; Columns: 3
+  #&gt; $ Horsepower &lt;int&gt; 140, 200, 172, 172, 208, 110, 170, 180, 170, 200, 295, 110,~
+  #&gt; $ Type       &lt;fct&gt; Small, Midsize, Compact, Midsize, Midsize, Midsize, Large, ~
+  #&gt; $ AirBags    &lt;fct&gt; None, Driver &amp; Passenger, Driver only, Driver &amp; Passenger, ~
+```
+
+
+&lt;!-- Base de Dados Cars93 + Histogram--&gt;
+
+---
+class: middle
+
+# Base de Dados Cars93
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist1.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist2-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram(binwidth = 10)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist3-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram(binwidth = 10,
+                 color = "black",
+                 fill = "darkorchid4")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist3.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram(binwidth = 10,
+                 color = "black",
+                 fill = "darkorchid4") +
+  theme_bw() 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist4-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram(binwidth = 10,
+                 color = "black",
+                 fill = "darkorchid4") +
+  theme_bw() +
+  labs(x = "Nome eixo x", 
+       y = "Nome eiixo y", 
+       title = "Título",
+       subtitle = "Subtítulo",
+       caption="Fonte de Dados")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist4.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Histograma
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Horsepower)) +
+  geom_histogram(bins = 10, 
+                 color = "black", 
+                 fill = "darkorchid4") +
+  theme_bw() +
+  labs(x = "Frequencia", 
+       y = "Horsepower", 
+       title = "Potencia")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-hist5-1.png)
+]
+
+
+
+&lt;!-- Base de Dados Cars93 + Gráfico de Barras--&gt;
+---
+class: middle
+
+# Base de Dados Cars93 
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type)) +
+  geom_bar()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar2-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type)) +
+  geom_bar(fill = "darkorchid4")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar3-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type)) +
+  geom_bar(fill = "darkorchid4") +
+  labs(x = "Tipo de carro", y = "Contagem",
+       title = "Tipo de carro") 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar5-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type)) +
+  geom_bar(fill = "darkorchid4") +
+  labs(x = "Tipo de carro", y = "Contagem",
+       title = "Tipo de carro") +
+  theme_minimal()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar5.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type)) +
+  geom_bar(fill = "darkorchid4") +
+  labs(x = "Tipo de carro", y = "Contagem",
+       title = "Tipo de carro") +
+  theme_minimal() +
+  facet_grid( ~ AirBags)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar6-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type, fill = AirBags)) +
+  geom_bar(position = "dodge", 
+               color = "black") +
+  theme_minimal()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar7-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type, fill = AirBags)) +
+  geom_bar(position = "dodge", 
+               color = "black") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Purples", 
+                    direction = 1)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar7.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type, fill = AirBags)) +
+  geom_bar(position = "fill", 
+               color = "black") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Purples", 
+                    direction = 1)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar8-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type, fill = AirBags)) +
+  geom_bar(position = "stack", 
+               color = "black") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Purples", 
+                    direction = 1)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar9-1.png)
+]
+
+
+
+
+---
+class: middle
+
+# Base de Dados Cars93 + Gráfico de Barras
+
+.left-code[
+
+```r
+ggplot(df, aes(x = Type, fill = AirBags)) +
+  geom_bar(position = "stack", 
+               color = "black") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Purples", 
+                    direction = 1) +
+  coord_flip()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bar10-1.png)
+]
+
+
+
+
+&lt;!-- Base de Dados HairEyeColor + boxplot --&gt;
+---
+class: middle
+
+# Base de Dados HairEyeColor
+
+
+```r
+#Conjunto de bibliotecas para ciência de dados 
+  install.packages("tidyverse")
+  library(tidyverse)
+```
+
+
+
+```r
+dfhair &lt;- data.frame(HairEyeColor)
+glimpse(dfhair)
+  #&gt; Rows: 32
+  #&gt; Columns: 4
+  #&gt; $ Hair &lt;fct&gt; Black, Brown, Red, Blond, Black, Brown, Red, Blond, Black, Brown,~
+  #&gt; $ Eye  &lt;fct&gt; Brown, Brown, Brown, Brown, Blue, Blue, Blue, Blue, Hazel, Hazel,~
+  #&gt; $ Sex  &lt;fct&gt; Male, Male, Male, Male, Male, Male, Male, Male, Male, Male, Male,~
+  #&gt; $ Freq &lt;dbl&gt; 32, 53, 10, 3, 11, 50, 10, 30, 10, 25, 7, 5, 3, 15, 7, 8, 36, 66,~
+```
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   fill = Sex)) +
+  theme_minimal() +
+  geom_boxplot()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt2-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   color = Sex)) +
+  theme_minimal() +
+  geom_boxplot() +
+  scale_x_discrete(labels = c("Homem", "Mulher")) +
+  xlab("Sexo") +
+  ylab("Frequencia") +
+  scale_color_manual(values = 
+                       c("darkorchid4", "brown2"))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt2.1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   color = Sex)) +
+  theme_minimal() +
+  geom_boxplot(
+    outlier.colour = "black",
+    outlier.shape = 8,
+    outlier.size = 4
+  ) +
+  scale_x_discrete(labels = c("Homem", "Mulher")) +
+  xlab("Sexo") +
+  ylab("Frequencia") +
+  scale_color_manual(values = 
+                       c("darkorchid4", "brown2"))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt3-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   color = Sex)) +
+  theme_minimal() +
+  geom_boxplot() +
+  geom_dotplot(
+    binaxis = 'y',
+    stackdir = 'center',
+    dotsize = 1,
+    binwidth = 2
+  ) +
+  scale_x_discrete(labels = c("Homem", "Mulher")) +
+  xlab("Sexo") +
+  ylab("Frequencia") +
+  scale_color_manual(values = 
+                       c("darkorchid4", "brown2"))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt4-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   color = Sex)) +
+  theme_minimal() +
+  geom_boxplot(
+    outlier.colour = "black",
+    outlier.shape = 8,
+    outlier.size = 4
+  ) +
+  scale_x_discrete(labels = c("Homem", "Mulher")) +
+  labs(
+    title = "Boxplot",
+    x = "Sexo",
+    y = "Frequência",
+    subtitle = "HairEyeColor"
+  )
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt6-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados HairEyeColor + Boxplot
+
+.left-code[
+
+```r
+ggplot(dfhair, aes(x = as.factor(Sex), y = Freq, 
+                   fill = Sex)) +
+  theme_minimal() +
+  geom_boxplot(
+    outlier.colour = "black",
+    outlier.shape = 8,
+    outlier.size = 4
+  ) +
+  scale_x_discrete(labels = c("Homem", "Mulher")) +
+  labs(
+    title = "Boxplot",
+    x = "Sexo",
+    y = "Frequência",
+    subtitle = "HairEyeColor"
+  ) +
+  scale_fill_manual(values = 
+                      c("darkorchid4", "brown2"))
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-bpt7-1.png)
+]
+
+
+&lt;!-- Base de Dados mtcars + gráf dispersão --&gt;
+---
+class: middle
+
+
+```r
+#Conjunto de bibliotecas para ciência de dados 
+  install.packages("tidyverse"); library(tidyverse)
+```
+
+
+# Base de Dados mtcars
+
+```r
+data(mtcars)
+glimpse(mtcars)
+  #&gt; Rows: 32
+  #&gt; Columns: 11
+  #&gt; $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,~
+  #&gt; $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,~
+  #&gt; $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16~
+  #&gt; $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180~
+  #&gt; $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,~
+  #&gt; $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.~
+  #&gt; $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18~
+  #&gt; $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,~
+  #&gt; $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,~
+  #&gt; $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,~
+  #&gt; $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,~
+```
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp2-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point(aes(size = drat)) +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp3-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat, colour = cyl)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados",
+    colour="Cilindros")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp4-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados") +
+  geom_vline(xintercept = 20, col="red") 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp5-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados") +
+  geom_hline(yintercept = 4, col="red") 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp6-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados") +
+  geom_vline(xintercept = 10:15, col="red") 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp7-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados") +
+  geom_smooth(method = "lm", se = FALSE, col="red") 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp8-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Gráfico de Dispersão
+
+.left-code[
+
+```r
+ggplot(mtcars, aes(mpg, drat)) +
+  geom_point() +
+  theme_classic() +
+  labs(
+    title = "Meu gráfico :)",
+    subtitle = "Gráfico de Dispersão",
+    x = "MPG",
+    y = "Drat",
+    caption = "Fonte de dados") +
+  geom_smooth(method = "lm", se = TRUE, col="red")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-disp9-1.png)
+]
+
+
+
+
+&lt;!-- Base de Dados XXX + Series Temporais--&gt;
+---
+class: middle
+
+# Base de Dados Ações
+
+
+```r
+#Pacote que extrai dados do mercado de ações
+install.packages("BatchGetSymbols")
+library(BatchGetSymbols)
+```
+
+
+```r
+#Definindo ações para extração de dados
+empresas &lt;- c('PETR4.SA', 'CIEL3.SA')
+
+#Definindo a minha série de tempo
+first.date &lt;- Sys.Date()-90
+last.date &lt;- Sys.Date()
+
+#Inserindo os paramentros para extrair o meu dataframe
+temp &lt;- BatchGetSymbols(tickers = empresas,
+                         first.date = first.date,
+                         last.date = last.date, do.cache=FALSE)
+```
+
+---
+class: middle
+
+# Base de Dados Ações
+
+
+```r
+meudataset &lt;- temp$df.tickers
+
+glimpse(meudataset)
+  #&gt; Rows: 124
+  #&gt; Columns: 10
+  #&gt; $ price.open          &lt;dbl&gt; 26.28, 26.48, 25.91, 26.08, 26.20, 26.96, 27.40, 2~
+  #&gt; $ price.high          &lt;dbl&gt; 26.52, 26.62, 26.18, 26.25, 27.02, 27.20, 27.70, 2~
+  #&gt; $ price.low           &lt;dbl&gt; 25.99, 25.78, 25.65, 25.77, 26.15, 26.78, 27.01, 2~
+  #&gt; $ price.close         &lt;dbl&gt; 26.39, 25.84, 26.09, 25.91, 26.99, 26.87, 27.29, 2~
+  #&gt; $ volume              &lt;dbl&gt; 63029600, 63672000, 46646900, 48877800, 129526400,~
+  #&gt; $ price.adjusted      &lt;dbl&gt; 24.90657, 24.38748, 24.62343, 24.45355, 25.47284, ~
+  #&gt; $ ref.date            &lt;date&gt; 2021-05-24, 2021-05-25, 2021-05-26, 2021-05-27, 2~
+  #&gt; $ ticker              &lt;chr&gt; "PETR4.SA", "PETR4.SA", "PETR4.SA", "PETR4.SA", "P~
+  #&gt; $ ret.adjusted.prices &lt;dbl&gt; NA, -0.0208412103, 0.0096748808, -0.0068992013, 0.~
+  #&gt; $ ret.closing.prices  &lt;dbl&gt; NA, -0.0208411906, 0.0096749226, -0.0068991951, 0.~
+```
+
+---
+class: middle
+
+# Base de Dados Ações + Series Temporais
+
+.left-code[
+
+```r
+ggplot(meudataset, 
+       aes(x = ref.date,
+           y = volume)) +
+  geom_line()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-st1-1.png)
+]
+
+---
+class: middle
+
+# Base de Dados Ações + Series Temporais
+
+.left-code[
+
+```r
+ggplot(meudataset, 
+       aes(x = ref.date, 
+           y = volume, 
+           color = ticker)) +
+  geom_line()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-st2-1.png)
+]
+
+
+---
+class: middle
+
+# Base de Dados Ações + Series Temporais
+
+.left-code[
+
+```r
+ggplot(meudataset, 
+       aes(x = ref.date, 
+           y = volume, 
+           color = ticker)) +
+  geom_line() +
+  labs(
+    title = "Série Temporal",
+    subtitle = "Ações",
+    x = "Data",
+    y = "Volume de Ações",
+    caption = "Fonte: Bovespa"
+  ) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-st3-1.png)
+]
+
+---
+class: middle
+
+# Base de Dados Ações + Series Temporais
+
+.left-code[
+
+```r
+ggplot(meudataset, 
+       aes(x = ref.date, 
+           y = volume, 
+           color = ticker)) +
+  geom_line() +
+  labs(
+    title = "Série Temporal",
+    subtitle = "Ações",
+    x = "Data",
+    y = "Volume de Ações",
+    caption = "Fonte: Bovespa"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_x_date(date_breaks = "2 week")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-st4-1.png)
+]
+
+
+&lt;!-- Base de Dados XXX + Heatmap --&gt;
+---
+class: middle
+
+
+# Base de Dados Happy
+
+
+```r
+#Extensão do ggplot2 para análises de correlação e base happy
+  install.packages("GGally"); library(GGally)
+
+#Pacote com paleta de cores otimizada
+  install.packages("viridis"); library(viridis)
+```
+
+
+```r
+glimpse(happy)
+  #&gt; Rows: 51,020
+  #&gt; Columns: 10
+  #&gt; $ id      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,~
+  #&gt; $ happy   &lt;fct&gt; not too happy, not too happy, pretty happy, not too happy, pre~
+  #&gt; $ year    &lt;dbl&gt; 1972, 1972, 1972, 1972, 1972, 1972, 1972, 1972, 1972, 1972, 19~
+  #&gt; $ age     &lt;dbl&gt; 23, 70, 48, 27, 61, 26, 28, 27, 21, 30, 30, 56, 54, 49, 41, 54~
+  #&gt; $ sex     &lt;fct&gt; female, male, female, female, female, male, male, male, female~
+  #&gt; $ marital &lt;fct&gt; never married, married, married, married, married, never marri~
+  #&gt; $ degree  &lt;fct&gt; bachelor, lt high school, high school, bachelor, high school, ~
+  #&gt; $ finrela &lt;fct&gt; average, above average, average, average, above average, above~
+  #&gt; $ health  &lt;fct&gt; good, fair, excellent, good, good, good, excellent, good, exce~
+  #&gt; $ wtssall &lt;dbl&gt; 0.4446, 0.8893, 0.8893, 0.8893, 0.8893, 0.4446, 0.4446, 0.4446~
+```
+
+
+
+---
+class: middle
+
+# Base de Dados Happy + Heatmap
+
+.left-code[
+
+
+```r
+  happy %&gt;% 
+    count(age, year) %&gt;% 
+    ggplot(aes(age, year, fill = n)) +
+      geom_tile() +
+      scale_fill_viridis() 
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-heatmap1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados Happy + Heatmap
+
+.left-code[
+
+
+```r
+  happy %&gt;% 
+    count(age, year) %&gt;% 
+    group_by(year) %&gt;%
+    mutate(total = sum(n),
+           prop = n / total) %&gt;%
+    ggplot(aes(age, year, fill = prop)) +
+      geom_tile() +
+      scale_fill_viridis()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-heatmap2-1.png)
+]
+
+
+
+
+---
+class: middle
+
+# Base de Dados Happy + Heatmap
+
+.left-code[
+
+
+```r
+  happy %&gt;% 
+    drop_na(happy) %&gt;% 
+    count(age, year, happy) %&gt;% 
+    group_by(year, happy) %&gt;%
+    mutate(total = sum(n),
+           prop = n / total) %&gt;%
+    ggplot(aes(age, year, fill = prop)) +
+      geom_tile() +
+      scale_fill_viridis() +
+  facet_grid(.~happy)
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-heatmap3-1.png)
+]
+
+
+
+
+&lt;!-- mtcars + Correlagrama --&gt;
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Correlagrama
+
+.left-code[
+
+```r
+library(corrplot)
+
+m &lt;- cor(mtcars)
+corrplot(m,method="circle")
+
+corrplot(m, method = "color",
+         addCoef.col = "black")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-corr-1.png)
+]
+
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Correlagrama
+
+.left-code[
+
+```r
+corrplot(m, method = "color",
+         addCoef.col = "black")
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-corr0-1.png)
+]
+
+
+&lt;!-- Base de Dados mtcars + ggpairs --&gt;
+
+---
+class: middle
+
+# Base de Dados mtcars + Matriz de gráficos
+
+.left-code[
+
+```r
+mtcars %&gt;% 
+  ggpairs()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-corr1-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Matriz de gráficos
+
+.left-code[
+
+```r
+mtcars %&gt;% 
+  select(drat:am) %&gt;% 
+  ggpairs()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-corr2-1.png)
+]
+
+
+
+---
+class: middle
+
+# Base de Dados mtcars + Matriz de gráficos
+
+.left-code[
+
+```r
+mtcars %&gt;% 
+  select(drat:am) %&gt;% 
+  mutate(across(c("vs", "am") ,as.factor)) %&gt;% 
+  ggpairs()
+```
+]
+
+.right-plot[
+![](index_files/figure-html/plot-exemplo-corr3-1.png)
+]
+
+
+
+
+
+
+
+&lt;!-- Base de Dados diamonds + plotly --&gt;
+---
+class: middle
+
+# Base de Dados Diamonds
+
+
+```r
+#Extensão do ggplot2 para análises de correlação e base happy
+  install.packages("plotly"); library(plotly)
+```
+
+
+```r
+set.seed(100)
+d &lt;- diamonds %&gt;% filter(cut %in% c("Very Good", "Premium", "Ideal")) %&gt;% sample_frac(0.05)
+d %&gt;% glimpse
+  #&gt; Rows: 2,371
+  #&gt; Columns: 10
+  #&gt; $ carat   &lt;dbl&gt; 1.51, 0.90, 0.33, 0.30, 1.08, 0.41, 0.64, 1.74, 0.73, 0.24, 1.~
+  #&gt; $ cut     &lt;ord&gt; Very Good, Very Good, Premium, Ideal, Very Good, Ideal, Ideal,~
+  #&gt; $ color   &lt;ord&gt; J, G, E, H, H, H, G, G, I, F, D, G, G, I, E, G, F, D, D, H, E,~
+  #&gt; $ clarity &lt;ord&gt; VS1, SI1, VS2, VVS1, VS2, SI1, VS1, VS2, VS1, VVS2, SI1, VVS2,~
+  #&gt; $ depth   &lt;dbl&gt; 61.2, 63.4, 62.0, 61.8, 62.9, 62.4, 62.3, 61.0, 61.2, 61.6, 63~
+  #&gt; $ table   &lt;dbl&gt; 63.0, 54.0, 59.0, 55.0, 59.0, 53.0, 54.0, 58.0, 59.0, 54.0, 60~
+  #&gt; $ price   &lt;int&gt; 8524, 3615, 928, 665, 5515, 722, 2155, 17614, 2371, 552, 5543,~
+  #&gt; $ x       &lt;dbl&gt; 7.31, 6.11, 4.41, 4.34, 6.47, 4.78, 5.54, 7.77, 5.82, 4.00, 6.~
+  #&gt; $ y       &lt;dbl&gt; 7.24, 6.16, 4.39, 4.37, 6.56, 4.81, 5.56, 7.75, 5.84, 4.09, 6.~
+  #&gt; $ z       &lt;dbl&gt; 4.45, 3.89, 2.73, 2.69, 4.10, 2.99, 3.46, 4.73, 3.57, 2.49, 4.~
+```
+
+
+---
+class: middle
+
+# Base de Dados Diamonds + plotly
+
+
+```r
+p &lt;- ggplot(d, aes(x = carat, y = price)) +
+  geom_point(aes(text = paste("Clarity:", clarity)), size = 4) +
+  geom_smooth(aes(colour = cut, fill = cut)) + facet_grid(.~cut)
+#ggplotly(p)
+```
+<div id="htmlwidget-d8ef48c87008536bd10f" style="width:100%;height:504px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d8ef48c87008536bd10f">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-36.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+
+&lt;!-- ggplot-cheatSheet --&gt;
+
+---
+class: middle
+
+# Referência para o ggplot 
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/ggplot-cheatSheet-pt1.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;RStudio CheatSheets: &amp;lt;a href='https://www.rstudio.com/resources/cheatsheets'&amp;gt; ggplot2 &amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="60%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;RStudio CheatSheets: &lt;a href='https://www.rstudio.com/resources/cheatsheets'&gt; ggplot2 &lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+class: middle
+
+# Referência para o ggplot
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/ggplot-cheatSheet-pt2.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;RStudio CheatSheets: &amp;lt;a href='https://www.rstudio.com/resources/cheatsheets'&amp;gt; ggplot2 &amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="60%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;RStudio CheatSheets: &lt;a href='https://www.rstudio.com/resources/cheatsheets'&gt; ggplot2 &lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;!-- esquisse --&gt;
+
+---
+class: middle
+
+# Biblioteca Esquisse
+
+
+```r
+install.packages("esquisse")
+library(esquisse)
+```
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/R-for-better-ds.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="50%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;!-- Outras possibilidades gráficas --&gt;
+---
+class: middle
+
+# **Quais outras opções de pacotes para visualização de dados?**
+
+
+&lt;!-- gganimate1 --&gt;
+---
+class: middle
+
+# gganimate
+&lt;img src="index_files/figure-html/unnamed-chunk-41-1.gif" width="50%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- gganimate2 --&gt;
+---
+class: middle
+
+# gganimate
+&lt;img src="index_files/figure-html/unnamed-chunk-42-1.gif" width="50%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- Highcharter --&gt;
+---
+class: middle
+
+# Highcharter
+
+
+
+
+<div id="htmlwidget-08cf06281122779a806a" style="width:100%;height:504px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-08cf06281122779a806a">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-44.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+
+&lt;!-- shiny --&gt;
+---
+class: middle
+
+#Shiny
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/shiny_exemploMapa.gif" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;GIF: Demonstração de um &amp;lt;a href='https://humansofdata.atlan.com/2019/01/shiny-electricity-latrine-water-india/'&amp;gt;Shiny do humansofdata. &amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="80%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;GIF: Demonstração de um &lt;a href='https://humansofdata.atlan.com/2019/01/shiny-electricity-latrine-water-india/'&gt;Shiny do humansofdata. &lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+&lt;!-- leaflet --&gt;
+---
+class: middle
+
+# Leaflet + Shiny
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/shinyleaflet.gif" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;GIF: Demonstração de um &amp;lt;a href='http://shiny.rstudio.com/gallery/superzip-example.html'&amp;gt;Shiny do Super Zip Explorer&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="80%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;GIF: Demonstração de um &lt;a href='http://shiny.rstudio.com/gallery/superzip-example.html'&gt;Shiny do Super Zip Explorer&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- leaflet --&gt;
+---
+class: center, middle
+
+## Todos os slides foram feitos no Rmarkdown!
+
+
+---
+
+&lt;!-- agradecimentos --&gt;
+--- 
+
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/allisonhorst/community1.jpg" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Ilustração por Allison Horst - Twitter: &amp;lt;a href='https://twitter.com/allison_horst/'&amp;gt; @allison_horst&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="40%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Ilustração por Allison Horst - Twitter: &lt;a href='https://twitter.com/allison_horst/'&gt; @allison_horst&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+---
+class:  center, middle
+
+# Obrigada!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"highlightLines": true,
+"highlightStyle": "github",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
