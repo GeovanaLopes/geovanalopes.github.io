@@ -54,7 +54,7 @@ Tutorial da Curso-R (Windows, Mac, Linux): <https://livro.curso-r.com/1-instalac
 
 -   Instalar o RStudio
 
--   Salvar esse arquivo zip na pasta onde você for trabalhar: <https://bit.ly/codabr2023>
+-   Salvar esse arquivo zip na pasta onde você for trabalhar: <https://bit.ly/abraji_2024>
 
 ## =\> Introdução
 
